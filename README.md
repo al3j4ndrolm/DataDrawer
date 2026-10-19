@@ -1,7 +1,5 @@
 # DataDrawer
 
-[![JitPack](https://jitpack.io/v/al3j4ndrolm/DataDrawer.svg)](https://jitpack.io/#al3j4ndrolm/DataDrawer)
-[![Build](https://github.com/al3j4ndrolm/DataDrawer/actions/workflows/build.yml/badge.svg)](https://github.com/al3j4ndrolm/DataDrawer/actions/workflows/build.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 **Android local storage in one line.** No DataStore setup, no Room boilerplate, no `suspend`.
@@ -53,26 +51,41 @@ datadrawer.drawer("session").clear()         // wipes only that drawer
 
 ## Install
 
-Add JitPack to `settings.gradle.kts`:
+DataDrawer is published to a private GitHub Packages registry, so Gradle needs a token to download it.
+
+**1. Create a token (once per computer).** On GitHub, go to **Settings → Developer settings → Personal access tokens → Tokens (classic)** and create one with only the `read:packages` scope. Then add it to `~/.gradle/gradle.properties` (your home folder, not the project, so it never gets committed):
+
+```properties
+gpr.user=al3j4ndrolm
+gpr.key=YOUR_TOKEN
+```
+
+**2. Add the registry** to your app's `settings.gradle.kts`:
 
 ```kotlin
 dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven("https://jitpack.io")
+        maven {
+            url = uri("https://maven.pkg.github.com/al3j4ndrolm/DataDrawer")
+            credentials {
+                username = providers.gradleProperty("gpr.user").get()
+                password = providers.gradleProperty("gpr.key").get()
+            }
+        }
     }
 }
 ```
 
-Then add one dependency (min SDK 23):
+**3. Add one dependency** (min SDK 23):
 
 ```kotlin
 // Compose apps: rememberDrawer and list state, plus everything else
-implementation("com.github.al3j4ndrolm.DataDrawer:datadrawer-compose:1.0.0")
+implementation("io.github.al3j4ndrolm:datadrawer-compose:1.0.0")
 
 // Views apps
-implementation("com.github.al3j4ndrolm.DataDrawer:datadrawer:1.0.0")
+implementation("io.github.al3j4ndrolm:datadrawer:1.0.0")
 ```
 
 To save your own classes, also apply the serialization plugin in that module:
@@ -100,6 +113,14 @@ plugins {
 - Made for settings, small objects and lists of up to a few thousand items. For large or searchable datasets, use Room.
 - Data is stored as plain JSON in your app's private folder. Don't store passwords or tokens.
 - Changed a class? Removed fields are ignored, and new fields need a default value to read old data.
+
+## Releasing
+
+Bump `version` in `gradle.properties`, commit, then push a matching tag. The Publish workflow tests and publishes it:
+
+```bash
+git tag 1.0.1 && git push origin 1.0.1
+```
 
 ## Contributing
 
