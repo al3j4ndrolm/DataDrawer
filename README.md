@@ -6,6 +6,10 @@
 
 **Android local storage in one line.** No DataStore setup, no Room boilerplate, no `suspend`.
 
+<p align="center">
+  <img src="docs/demo.gif" alt="Type a name and add notes, close the app, reopen it: everything is still there" width="270">
+</p>
+
 ```kotlin
 datadrawer.save("name", "Ale")
 val name = datadrawer.get<String>("name")
