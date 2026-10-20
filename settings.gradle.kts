@@ -22,7 +22,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "DataDrawer"
-include(":datadrawer")
-include(":datadrawer-compose")
+rootProject.name = "FacilisStorage"
+include(":storage")
+include(":storage-compose")
 include(":sample")

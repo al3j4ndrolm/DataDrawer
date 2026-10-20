@@ -16,4 +16,4 @@ jobs:
           java-version: 17
       - uses: gradle/actions/setup-gradle@v4
       - name: Build and test
-        run: ./gradlew :datadrawer:testDebugUnitTest :datadrawer-compose:assembleRelease :sample:assembleDebug --console=plain
+        run: ./gradlew :storage:testDebugUnitTest :storage-compose:assembleRelease :sample:assembleDebug --console=plain
