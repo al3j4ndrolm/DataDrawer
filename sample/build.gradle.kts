@@ -5,13 +5,13 @@ plugins {
 }
 
 android {
-    namespace = "io.github.al3j4ndrolm.datadrawer.sample"
+    namespace = "io.github.al3j4ndrolm.facilis.storage.sample"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "io.github.al3j4ndrolm.datadrawer.sample"
+        applicationId = "io.github.al3j4ndrolm.facilis.storage.sample"
         minSdk = 24
         targetSdk = 37
         versionCode = 1
@@ -28,7 +28,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":datadrawer-compose"))
+    implementation(project(":storage-compose"))
 
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)

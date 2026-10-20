@@ -1,4 +1,4 @@
 jdk:
   - openjdk17
 install:
-  - ./gradlew :datadrawer:publishReleasePublicationToMavenLocal :datadrawer-compose:publishReleasePublicationToMavenLocal
+  - ./gradlew :storage:publishReleasePublicationToMavenLocal :storage-compose:publishReleasePublicationToMavenLocal
